@@ -16,7 +16,7 @@ library(parallel) ### faster graph construction
 ### finds nearest neighbours
 get_nn <- function(i, nn, embeddings) {
   
-  temp  <- acos(-pmax(pmin(cosineSimilarity(t(embeddings[i,]), embeddings), 1), 0))/pi
+  temp  <- acos(pmax(pmin(-cosineSimilarity(t(embeddings[i,]), embeddings), 1), 0))/pi
   index <- sort.list(temp,decreasing = T)[2:(nn+1)]
   
   cbind(i, index, temp[index])
